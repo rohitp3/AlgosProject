@@ -5,6 +5,8 @@
  */
 package algosproject;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,7 +23,7 @@ public class AlgosProjects {
      */
     public static void main(String[] args) {
         
-    int n;  
+    int n; int option=1;  
     long inputArray[];
     long sortedArray[];
     int Roption;
@@ -29,6 +31,13 @@ public class AlgosProjects {
     long startTime=0;
     long stopTime=0;
     int Ooption;
+    String Fdata="";
+    int loption;
+    String filename1,filename2,filename3;
+    
+    
+    do
+    {
     // TODO code application logic here
     Scanner sc=new Scanner(System.in);
     System.out.println("*****Welcome to Algos Experiment console!*******");
@@ -45,6 +54,7 @@ public class AlgosProjects {
                  System.out.println("Enter the size of array:");
                  n=Integer.parseInt(sc.nextLine());
                  inputArray=new long[n];
+                 System.out.println("Enter the numbers:");
                  for(int j=0;j<n;j++)
                  {
                   inputArray[j]=Long.parseLong(sc.nextLine().trim());
@@ -52,8 +62,19 @@ public class AlgosProjects {
                  }
                  break;
         case 2 :{
+               
+                 System.out.println("Enter the filename (add .txt ext)");
+                 String inputfilename=".\\"+sc.nextLine().trim();
+                 Fdata=getdatafromfile(inputfilename);         
+                 if(Fdata.length()>0)
+                 {
+                     inputArray=convertstringtolongarray(Fdata);
+                     
+                 }
+                 else{
                   inputArray=new long[0];
-                }
+                  }
+                 }
                 break;
         case 3 :{
                  System.out.println("Options to generate random numbers");
@@ -150,7 +171,117 @@ public class AlgosProjects {
         }    
     }
     
+    System.out.println("Would you like to run longest common sequence algorithm?");
+    System.out.println("1. Yes");
+    System.out.println("2. No");
+    loption=Integer.parseInt(sc.nextLine().trim());
+    if(loption==1)
+    {
+    System.out.println("Enter File Name1:");
+    filename1=sc.nextLine().trim();
+    System.out.println("Enter File Name2:");
+    filename2=sc.nextLine().trim();
+    System.out.println("Enter File Name3:");
+    filename3=sc.nextLine().trim();
+    longestcommonseq(filename1,filename2,filename3);
+    }
     
+    System.out.println("do you want to run experiment again ?");
+    System.out.println("1.No");
+    System.out.println("2.Yes");
+     option=Integer.parseInt(sc.nextLine());
+     
+    
+    }while(2==option);
+    
+    }
+    
+    
+    
+    public static void longestcommonseq(String f1,String f2,String f3)
+    {
+       String fp1=".\\"+f1;
+       String fp2=".\\"+f2;
+       String fp3=".\\"+f3;
+       String str1,str2,str3;
+       long arr1[],arr2[],arr3[];
+       str1=getdatafromfile(fp1);
+       arr1=convertstringtolongarray(str1);
+       str2=getdatafromfile(fp2);
+       arr2=convertstringtolongarray(str2);
+       str3=getdatafromfile(fp3);
+       arr3=convertstringtolongarray(str3);
+       LCS lcs=new LCS();  
+       String lcsouputbeforesort= lcs.getlcs(arr1,arr2,arr3);
+ 
+       long sortarr1[],sortarr2[],sortarr3[];
+       SelectionSort ss=new SelectionSort();
+       sortarr1=ss.sortlong(arr1);
+       createoutputfile(sortarr1,"n2SORT.txt");
+       HeapSort hs=new HeapSort();
+       sortarr2=hs.sortlong(arr2);
+       createoutputfile(sortarr2,"nlgnSORT.txt");
+       RadixSort rs=new RadixSort();
+       sortarr3=rs.sortlong(arr3);
+       createoutputfile(sortarr3,"nSORT.txt");
+ 
+       String lcsouputaftersort=lcs.getlcs(sortarr1,sortarr2,sortarr3);
+                  
+    }
+    public static void createoutputfile(long[] temparray,String filename)
+    {
+        
+        String data=convertarraytostring(temparray);
+        String ffp=".\\"+filename;
+        
+              try
+            {
+            PrintWriter out = new PrintWriter(new FileWriter(".\\"+filename+".txt")); 
+            //PrintWriter out = new PrintWriter(new FileWriter(".\\localPeaks_Output.txt"));
+            String outputstring=data;
+            out.println(outputstring);
+            System.out.println("Successful created! check output file for more details");
+            }
+            catch(IOException e)
+            {
+                System.out.println("Error occured :"+e.getMessage());
+            }
+      
+        
+    }
+    
+    public static String convertarraytostring(long[] arr)
+    {
+        String temp="";
+        
+        for(int i=0;i<arr.length;i++)
+        {   
+            temp=temp+ String.valueOf(arr[i])+",";
+            
+        }
+        return temp;
+    }
+    
+    public static String getdatafromfile(String inputfilename)
+    {
+        String line,Fdata=" ";
+                  try
+                 {
+                 FileReader fileReader = new FileReader(inputfilename);
+            BufferedReader in = new BufferedReader(fileReader);  
+            while((line = in.readLine()) != null)
+            {
+                Fdata=Fdata+line;
+            }
+            in.close();
+                 }
+                 catch(Exception e)
+                 {
+                     
+                 }
+                  
+                  return Fdata;
+       
     }
     
     public static void displaySortArray(long a[])
@@ -160,5 +291,17 @@ public class AlgosProjects {
             System.out.println(a[i]);
         }
     }
-    
+    public static long[] convertstringtolongarray(String input)
+    {
+        long data[];
+        String temp[]=input.split(",");
+        data=new long[temp.length];
+        for(int i=0;i<temp.length;i++)
+        {
+            data[i]=Long.parseLong(temp[i]);
+        }
+        
+        return data;
+        
+    }
 }
