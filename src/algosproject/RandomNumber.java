@@ -7,7 +7,7 @@ package algosproject;
 
 /**
  *
- * @author Rohit
+ * @author Rohit Padma
  */
 public class RandomNumber {
     
@@ -15,25 +15,25 @@ public class RandomNumber {
     {
     
 }
-    public long[] generateLongNum(int n)
+    public long[] generateNum(int n,int roption)
     {
         long temp[];
         temp = new long[n];
+        long range;
+        if(roption==1)
+        {
+            range=100000000;
+        }
+        else
+        {
+            range=10000;
+        }
+        
         for(int i=0;i<n;i++)
         {
-         temp[i]= (long)(Math.random()*100000000);
+         temp[i]= (long)(Math.random()*range);
         }
         return temp;
     }
    
-    public int[] generateIntNum(int n)
-    {
-        int temp[];
-        temp=new int[n];
-        for(int j=0;j<n;j++)
-        {
-          temp[j]=(int)(Math.random()*10000);  
-        }
-        return temp;
-    }
 }

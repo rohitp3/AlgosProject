@@ -7,7 +7,7 @@ package algosproject;
 
 /**
  *
- * @author Rohit
+ * @author Rohit Padma
  */
 public class SelectionSort {
    
