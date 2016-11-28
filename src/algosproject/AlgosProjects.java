@@ -298,7 +298,7 @@ public class AlgosProjects {
         data=new long[temp.length];
         for(int i=0;i<temp.length;i++)
         {
-            data[i]=Long.parseLong(temp[i]);
+            data[i]=Long.parseLong(temp[i].trim());
         }
         
         return data;
