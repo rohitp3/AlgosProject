@@ -76,7 +76,7 @@ public class AlgosProjects {
             System.out.println("Sort algorithm you want to run?");
             System.out.println("1.Selection O(N2)");
             System.out.println("2.Heap O(NlogN)");
-            System.out.println("3.Counting O(N)");
+            System.out.println("3.Radix O(N)");
             Soption=Integer.parseInt(sc.nextLine().trim());
             switch(Soption)
             {
@@ -101,11 +101,16 @@ public class AlgosProjects {
                         }
                         break;
                 case 3:{
-                          CountingSort cs=new CountingSort();
+                          RadixSort rs=new RadixSort();
                           if(inputArray.length>0)
-                          {   startTime=System.currentTimeMillis();
-                              sortedArray=cs.sortlong(inputArray);
+                          {  
+                              //System.out.println("Before sort");
+                              //displaySortArray(inputArray);
+                              startTime=System.currentTimeMillis();
+                              sortedArray=rs.sortlong(inputArray);
                               stopTime=System.currentTimeMillis();
+                              //System.out.println("After sort");
+                              //displaySortArray(sortedArray);
                           }
                         }
                         break; 

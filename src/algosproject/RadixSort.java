@@ -19,36 +19,44 @@ public class RadixSort {
     public long[] sortlong(long temp[])
     {
         long maxnumber= Arrays.stream(temp).max().getAsLong();
-        int n=temp.length;   
+        int n=temp.length;  
+        long outarray[];
         for(int i=1;maxnumber/i>0;i=i*10)
         {
-        long output[] = new long[n]; // output array
-        int j;
-        long count[] = new long[10];
-        Arrays.fill(count,0);
-        for ( j = 0; j < n; j++)
-            count[ (temp[j]/i)%10 ]++;
- 
-        // Change count[i] so that count[i] now contains
-        // actual position of this digit in output[]
-        for (i = 1; i < 10; i++)
-            count[i] += count[i - 1];
- 
-        // Build the output array
-        for (j = n - 1; j >= 0; j--)
-        {
-            output[count[ (temp[j]/i)%10 ] - 1] =  temp[i];
-            count[ (temp[i]/i)%10 ]--;
-        }
- 
-        // Copy the output array to arr[], so that arr[] now
-        // contains sorted numbers according to curent digit
-        for (i = 0; i < n; i++)
-            temp[i] = output[i];
- 
+            temp=sortcount(temp,i);
         }
         
         return temp;
         
     }  
+    
+    public  static long [] sortcount(long input[],int place)
+    {
+        long[] out = new long[input.length];
+
+        long[] count = new long[10];
+
+        for(int i=0; i < input.length; i++){
+            int digit = (int)getDigit(input[i], place);
+            count[digit] += 1;
+        }
+
+        for(int i=1; i < count.length; i++){
+            count[i] += count[i-1];
+        }
+
+        for(int i = input.length-1; i >= 0; i--){
+            int digit = (int)getDigit(input[i], place);
+
+            out[((int)(count[digit]))-1] = input[i];
+            count[digit]--;
+        }
+
+        return out;
+    }
+    private static long getDigit(long value, int digitPlace){
+        return ((value/digitPlace ) % 10);
+    }
+    
+    
 }

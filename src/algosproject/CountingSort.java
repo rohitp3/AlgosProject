@@ -5,6 +5,8 @@
  */
 package algosproject;
 
+import java.util.Arrays;
+
 /**
  *
  * @author Rohit
@@ -16,6 +18,10 @@ public class CountingSort {
     }
     public long[] sortlong(long temp[])
     {
+        int maxnumber= (int)Arrays.stream(temp).max().getAsLong();
+        
+        long countArray[]=new long[maxnumber];
+        
         
         return temp;
         
