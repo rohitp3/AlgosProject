@@ -105,9 +105,9 @@ public class AlgosProjects {
                          SelectionSort ss=new SelectionSort();
                          if(inputArray.length>0)
                          {
-                         startTime=System.currentTimeMillis();    
+                         startTime=System.nanoTime();    
                          sortedArray=ss.sortlong(inputArray);
-                         stopTime=System.currentTimeMillis();
+                         stopTime=System.nanoTime();
                          }  
                         }
                         break;
@@ -115,9 +115,9 @@ public class AlgosProjects {
                             HeapSort hs=new HeapSort();
                             if(inputArray.length>0)
                             {
-                              startTime=System.currentTimeMillis();  
+                              startTime=System.nanoTime();  
                               sortedArray=hs.sortlong(inputArray);
-                              stopTime=System.currentTimeMillis();
+                              stopTime=System.nanoTime();
                             }
                         }
                         break;
@@ -127,9 +127,9 @@ public class AlgosProjects {
                           {  
                               //System.out.println("Before sort");
                               //displaySortArray(inputArray);
-                              startTime=System.currentTimeMillis();
+                              startTime=System.nanoTime();
                               sortedArray=rs.sortlong(inputArray);
-                              stopTime=System.currentTimeMillis();
+                              stopTime=System.nanoTime();
                               //System.out.println("After sort");
                               //displaySortArray(sortedArray);
                           }
@@ -150,7 +150,7 @@ public class AlgosProjects {
         {  
             System.out.println("Sort Results:");
             System.out.println("Sorted Array Size:"+inputArray.length);
-            System.out.println("Run time :"+(stopTime-startTime)+"ms");
+            System.out.println("Run time :"+(stopTime-startTime)+"ns");
         }
         else
         {
