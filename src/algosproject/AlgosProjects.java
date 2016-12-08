@@ -25,7 +25,7 @@ public class AlgosProjects {
         
     int n; int option=1;  
     long inputArray[];
-    long sortedArray[];
+    long sortedArray[]=new long[0];
     int Roption;
     int Soption;
     long startTime=0;
@@ -84,7 +84,10 @@ public class AlgosProjects {
                  System.out.println("Enter the size of array:");
                  n=Integer.parseInt(sc.nextLine());
                  RandomNumber rn=new RandomNumber();
-                 inputArray=rn.generateNum(n,Roption);        
+                 inputArray=rn.generateNum(n,Roption);
+                 System.out.println("Input Random file:");
+                 createoutputfile(inputArray,"RandomGenerated_input");
+                 
                  }
                  break;
         default :{
@@ -151,6 +154,7 @@ public class AlgosProjects {
             System.out.println("Sort Results:");
             System.out.println("Sorted Array Size:"+inputArray.length);
             System.out.println("Run time :"+(stopTime-startTime)+"ns");
+            
         }
         else
         {
@@ -158,11 +162,14 @@ public class AlgosProjects {
             String filename=sc.nextLine().trim();
             try
             {
-            PrintWriter out = new PrintWriter(new FileWriter(filename+".txt")); 
-            //PrintWriter out = new PrintWriter(new FileWriter(".\\localPeaks_Output.txt"));
+            PrintWriter out = new PrintWriter(new FileWriter(filename+".txt"));
             String outputstring="Sort Results:"+" \n "+" Sorted Array Size:"+inputArray.length+" \n "+"Run time :"+((stopTime-startTime)/1000) +"micro seconds";
             out.println(outputstring);
             System.out.println("Successful created:"+filename+".txt");
+            System.out.println("File Containing sorted number!");
+            createoutputfile(sortedArray,"Output_Sorted_numbers");
+            
+            
             }
             catch(IOException e)
             {
