@@ -168,7 +168,7 @@ public class AlgosProjects {
             out.close();
             System.out.println("Successful created:"+filename+".txt");
             System.out.println("File Containing sorted number!");
-            createoutputfile(sortedArray,filename+"_Sorted_number"+".txt");
+            createoutputfile(sortedArray,filename+"_Sorted_number");
             
             
             }
