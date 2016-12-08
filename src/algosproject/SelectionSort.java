@@ -19,7 +19,7 @@ public class SelectionSort {
     public long[] sortlong(long temp[])
     {
         int min=0;
-        for(int j=1;j<temp.length;j++)
+        for(int j=0;j<temp.length;j++)
         {
             min=j;
             
