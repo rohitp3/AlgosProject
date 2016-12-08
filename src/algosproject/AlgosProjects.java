@@ -154,7 +154,9 @@ public class AlgosProjects {
             System.out.println("Sort Results:");
             System.out.println("Sorted Array Size:"+inputArray.length);
             System.out.println("Run time :"+(stopTime-startTime)+"ns");
-            
+            System.out.println("Sorted array:");
+            String datastring=convertarraytostring(sortedArray);
+            System.out.println(datastring);
         }
         else
         {
