@@ -65,7 +65,7 @@ public class AlgosProjects {
                
                  System.out.println("Enter the filename (don't add .txt extension)");
                  String inputfilename=".\\"+sc.nextLine().trim();
-                 Fdata=getdatafromfile(inputfilename);         
+                 Fdata=getdatafromfile(inputfilename+".txt");         
                  if(Fdata.length()>0)
                  {
                      inputArray=convertstringtolongarray(Fdata);
@@ -165,9 +165,10 @@ public class AlgosProjects {
             PrintWriter out = new PrintWriter(new FileWriter(filename+".txt"));
             String outputstring="Sort Results:"+" \n "+" Sorted Array Size:"+inputArray.length+" \n "+"Run time :"+((stopTime-startTime)/1000) +"micro seconds";
             out.println(outputstring);
+            out.close();
             System.out.println("Successful created:"+filename+".txt");
             System.out.println("File Containing sorted number!");
-            createoutputfile(sortedArray,"Output_Sorted_numbers");
+            createoutputfile(sortedArray,filename+"_Sorted_number"+".txt");
             
             
             }
