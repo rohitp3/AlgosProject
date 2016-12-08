@@ -92,18 +92,10 @@ public class LCS {
                         
 			x = solution[a][b][c];
 		}
-		System.out.println(answer);
-                System.out.println(x);
+		//System.out.println(answer);
+               
 		
-		for (int i = 0; i <= A.length; i++) {
-			for (int j = 0; j <= B.length; j++) {
-                            for(int k = 0; k <= C.length; k++)
-				System.out.print(" " + LCS[i][j][k]);
-			}
-			System.out.println();
-		}
-		//return LCS[A.length][B.length][C.length];
-	           return answer;
+                   return answer;
   }
 
 	public static void main(String[] args) {

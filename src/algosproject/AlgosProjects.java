@@ -63,7 +63,7 @@ public class AlgosProjects {
                  break;
         case 2 :{
                
-                 System.out.println("Enter the filename (add .txt ext)");
+                 System.out.println("Enter the filename (don't add .txt extension)");
                  String inputfilename=".\\"+sc.nextLine().trim();
                  Fdata=getdatafromfile(inputfilename);         
                  if(Fdata.length()>0)
@@ -158,11 +158,11 @@ public class AlgosProjects {
             String filename=sc.nextLine().trim();
             try
             {
-            PrintWriter out = new PrintWriter(new FileWriter(".\\"+filename+".txt")); 
+            PrintWriter out = new PrintWriter(new FileWriter(filename+".txt")); 
             //PrintWriter out = new PrintWriter(new FileWriter(".\\localPeaks_Output.txt"));
-            String outputstring="Sort Results:"+"\n"+"Sorted Array Size:"+inputArray.length+"\n"+"Run time :"+(stopTime-startTime)+"ms";
+            String outputstring="Sort Results:"+" \n "+" Sorted Array Size:"+inputArray.length+" \n "+"Run time :"+((stopTime-startTime)/1000) +"micro seconds";
             out.println(outputstring);
-            System.out.println("Successful created! check output file for more details");
+            System.out.println("Successful created:"+filename+".txt");
             }
             catch(IOException e)
             {
@@ -177,11 +177,11 @@ public class AlgosProjects {
     loption=Integer.parseInt(sc.nextLine().trim());
     if(loption==1)
     {
-    System.out.println("Enter File Name1:");
+    System.out.println("Enter File Name1(don't add .txt extension):");
     filename1=sc.nextLine().trim();
-    System.out.println("Enter File Name2:");
+    System.out.println("Enter File Name2(don't add .txt extension):");
     filename2=sc.nextLine().trim();
-    System.out.println("Enter File Name3:");
+    System.out.println("Enter File Name3(don't add .txt extension):");
     filename3=sc.nextLine().trim();
     longestcommonseq(filename1,filename2,filename3);
     }
@@ -200,9 +200,9 @@ public class AlgosProjects {
     
     public static void longestcommonseq(String f1,String f2,String f3)
     {
-       String fp1=".\\"+f1;
-       String fp2=".\\"+f2;
-       String fp3=".\\"+f3;
+       String fp1=f1+".txt";
+       String fp2=f2+".txt";
+       String fp3=f3+".txt";
        String str1,str2,str3;
        long arr1[],arr2[],arr3[];
        str1=getdatafromfile(fp1);
@@ -213,34 +213,59 @@ public class AlgosProjects {
        arr3=convertstringtolongarray(str3);
        LCS lcs=new LCS();  
        String lcsouputbeforesort= lcs.getlcs(arr1,arr2,arr3);
- 
+       createlcsoutputfile(lcsouputbeforesort,"LCS_in"); 
        long sortarr1[],sortarr2[],sortarr3[];
        SelectionSort ss=new SelectionSort();
        sortarr1=ss.sortlong(arr1);
-       createoutputfile(sortarr1,"n2SORT.txt");
+       createoutputfile(sortarr1,"n2SORT");
        HeapSort hs=new HeapSort();
        sortarr2=hs.sortlong(arr2);
-       createoutputfile(sortarr2,"nlgnSORT.txt");
+       createoutputfile(sortarr2,"nlgnSORT");
        RadixSort rs=new RadixSort();
        sortarr3=rs.sortlong(arr3);
-       createoutputfile(sortarr3,"nSORT.txt");
+       createoutputfile(sortarr3,"nSORT");
  
        String lcsouputaftersort=lcs.getlcs(sortarr1,sortarr2,sortarr3);
-                  
+       createlcsoutputfile(lcsouputaftersort,"LCS_out");           
     }
+    public static void createlcsoutputfile(String data,String filename)
+    {
+       
+        String ffp=filename+".txt";
+              try
+            {
+            PrintWriter out = new PrintWriter(new FileWriter(ffp)); 
+            
+            String outputstring=data;
+            out.println("Longest common sequence :-");
+            out.println(outputstring);
+            out.close();
+            System.out.println("Successful created : "+ffp);
+            }
+            catch(IOException e)
+            {
+                System.out.println("Error occured :"+e.getMessage());
+            }
+       
+        
+        
+    }
+    
+    
     public static void createoutputfile(long[] temparray,String filename)
     {
         
         String data=convertarraytostring(temparray);
-        String ffp=".\\"+filename;
+        String ffp=filename+".txt";
         
               try
             {
-            PrintWriter out = new PrintWriter(new FileWriter(".\\"+filename+".txt")); 
-            //PrintWriter out = new PrintWriter(new FileWriter(".\\localPeaks_Output.txt"));
+            PrintWriter out = new PrintWriter(new FileWriter(ffp)); 
+            
             String outputstring=data;
             out.println(outputstring);
-            System.out.println("Successful created! check output file for more details");
+            out.close();
+            System.out.println("Successful created:"+ffp);
             }
             catch(IOException e)
             {
@@ -259,7 +284,8 @@ public class AlgosProjects {
             temp=temp+ String.valueOf(arr[i])+",";
             
         }
-        return temp;
+        
+        return   temp.substring(0,temp.length() - 1);
     }
     
     public static String getdatafromfile(String inputfilename)
